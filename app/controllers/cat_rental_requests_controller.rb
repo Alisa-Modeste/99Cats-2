@@ -1,4 +1,5 @@
 class CatRentalRequestsController < ApplicationController
+  before_filter :check_for_login, only: [:approve, :deny]
 
   def new
     @cats = Cat.all

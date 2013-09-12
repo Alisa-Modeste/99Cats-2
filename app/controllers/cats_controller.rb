@@ -1,4 +1,7 @@
 class CatsController < ApplicationController
+   before_filter :check_for_login, only: [:update, :edit]
+
+
   def index
     @cats = Cat.all
 
@@ -19,14 +22,7 @@ class CatsController < ApplicationController
   def edit
     # make sure user owns cat. is this done here? or in update?
     @cat = Cat.find(params[:id])
-    if @cat.user_id == current_user.id
-      render :edit
-    else
-      # error message?
-      flash[:notices] ||= []
-      flash[:notices] << "That's not your cat!"
-      redirect_to :back
-    end
+    render :edit
   end
 
   def update

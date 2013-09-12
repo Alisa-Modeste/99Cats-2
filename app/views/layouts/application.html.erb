@@ -24,11 +24,10 @@
   <br>
   <%= link_to "Request a Cat Rental", new_cat_rental_request_url %>
   <br>
-  <% flash[:notices].try(:each) do |msg| %>
-    <strong> <%= msg %> </strong>
-  <% end %>
+  <strong><%= flash[:notice] %></strong>
 
-<%= yield %>
+
+  <%= yield %>
 
 </body>
 </html>

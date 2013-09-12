@@ -5,14 +5,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+
   <%= debug params %>
+  <%= debug session %>
   <br>
+  <h1>Welcome<%= ", #{current_user.user_name}" unless current_user.nil? %></h1>
+  <br>
+<%= if current_user.nil?
+      link_to "Login", new_session_url
+    else
+      button_to "Logout", session_url, method: :delete
+    end
+    %>
+    <br>
   <%= link_to "Cats index", cats_url %>
   <br>
   <%= link_to "Make New Cat", new_cat_url %>
   <br>
   <%= link_to "Request a Cat Rental", new_cat_rental_request_url %>
-
+  <br>
+  <% flash[:notices].try(:each) do |msg| %>
+    <strong> <%= msg %> </strong>
+  <% end %>
 
 <%= yield %>
 

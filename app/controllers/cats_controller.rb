@@ -17,18 +17,31 @@ class CatsController < ApplicationController
   end
 
   def edit
+    # make sure user owns cat. is this done here? or in update?
     @cat = Cat.find(params[:id])
-    render :edit
+    if @cat.user_id == current_user.id
+      render :edit
+    else
+      # error message?
+      flash[:notices] ||= []
+      flash[:notices] << "That's not your cat!"
+      redirect_to :back
+    end
   end
 
   def update
+    # make sure user owns cat. done here or in edit?
     Cat.find(params[:id]).update_attributes(params[:cat])
 
     redirect_to cat_url(params[:id]) #check
   end
 
   def create
-    Cat.create!(params[:cat])
+    # add owner's userid to cat.
+    p "current_user.id is #{current_user.id}"
+    values = params[:cat].clone
+    values[:user_id] = current_user.id
+    Cat.create!(values)
 
     redirect_to cats_url
   end

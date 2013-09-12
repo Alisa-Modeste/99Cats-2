@@ -3,7 +3,7 @@
 <form action="/cats/<%= "#{@cat.id}" %>" method="post">
 
   <input type="hidden" name="_method" value="PUT">
-
+  <%= render "shared/form_header" %>
   <%= render "cats/input", cat: @cat %>
 
   <input type="submit" value="Update my cat!">

@@ -1,9 +1,15 @@
 class User < ActiveRecord::Base
   attr_accessible :user_name, :session_token, :password
-  attr_accessor :password
 
   validates :user_name, :session_token, :password_digest, presence: true
   validates :user_name, uniqueness: true
+
+  has_many(
+    :cats,
+    class_name: "Cat",
+    primary_key: :id,
+    foreign_key: :user_id
+  )
 
   before_validation do |user|
     user.reset_session_token! if user.session_token.nil?
@@ -26,7 +32,7 @@ class User < ActiveRecord::Base
   end
 
   def is_password?(value)
-    self.password_digest.is_password?(value)
+     BCrypt::Password.new(self.password_digest).is_password?(value)
   end
 
 end

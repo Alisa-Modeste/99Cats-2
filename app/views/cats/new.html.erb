@@ -1,0 +1,9 @@
+<h1>Create a Cat</h1>
+<form action="/cats" method="post">
+
+  <%= render "cats/input",
+  cat: Cat.new({name: '', age:'', sex: '', color: '', birth_date: ''})%>
+
+  <input type="submit" value="Build my cat!">
+
+</form>

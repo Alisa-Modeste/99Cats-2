@@ -1,0 +1,10 @@
+<h1>Edit a Cat</h1>
+
+<form action="/cats/<%= "#{@cat.id}" %>" method="post">
+
+  <input type="hidden" name="_method" value="PUT">
+
+  <%= render "cats/input", cat: @cat %>
+
+  <input type="submit" value="Update my cat!">
+</form>

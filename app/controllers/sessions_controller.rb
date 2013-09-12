@@ -22,8 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    p "HERE"
-    current_user.reset_session_token!
+    current_user.reset_session_token!(true)
     self.end_session
     redirect_to cats_url
   end

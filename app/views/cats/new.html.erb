@@ -1,5 +1,5 @@
 <h1>Create a Cat</h1>
-<form action="/cats" method="post">
+<form action="<%= cats_url %> " method="post">
   <%= render "shared/form_header" %>
   <%= render "cats/input",
   cat: Cat.new({name: '', age:'', sex: '', color: '', birth_date: ''})%>

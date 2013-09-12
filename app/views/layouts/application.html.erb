@@ -8,6 +8,7 @@
 
   <%= debug params %>
   <%= debug session %>
+  <%= debug current_user unless current_user.nil? %>
   <br>
   <h1>Welcome<%= ", #{current_user.user_name}" unless current_user.nil? %></h1>
   <br>

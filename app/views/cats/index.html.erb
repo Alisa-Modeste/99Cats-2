@@ -1,5 +1,7 @@
 <h1>Cats List</h1>
 
+<strong><%= link_to "View Your Cats' Rentals", user_url(current_user.id) unless current_user.nil? %></strong>
+
 <ul>
   <% @cats.each do |cat| %>
   <li>
@@ -7,3 +9,4 @@
   </li>
   <% end %>
 </ul>
+

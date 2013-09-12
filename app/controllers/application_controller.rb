@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def check_for_login
     if params[:cat].nil?
-      crr = CatRentalRequest.find(params[:cat_rental_request_id])
+      crr = CatRentalRequest.find(params[:id])
       owner_id = crr.cat.owner.id
     else
       owner_id = params[:cat].user_id

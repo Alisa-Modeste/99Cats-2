@@ -11,6 +11,13 @@ class User < ActiveRecord::Base
     foreign_key: :user_id
   )
 
+  has_many(
+    :sessions,
+    class_name: "Session",
+    primary_key: :id,
+    foreign_key: :user_id
+  )
+
   before_validation do |user|
     user.reset_session_token! if user.session_token.nil?
   end
@@ -23,8 +30,12 @@ class User < ActiveRecord::Base
     nil
   end
 
-  def reset_session_token!
+  def reset_session_token!(logout = false)
     self.session_token = SecureRandom::urlsafe_base64(16)
+
+    unless logout
+      Session.create!(user_id: self.id, session_token: self.session_token)
+    end
   end
 
   def password=(value)

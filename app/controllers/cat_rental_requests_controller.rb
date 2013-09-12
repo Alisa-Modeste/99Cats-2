@@ -17,12 +17,12 @@ class CatRentalRequestsController < ApplicationController
   end
 
   def approve
-    CatRentalRequest.find(params[:cat_rental_request_id]).approve!
+    CatRentalRequest.find(params[:id]).approve!
     redirect_to :back
   end
 
   def deny
-    CatRentalRequest.find(params[:cat_rental_request_id]).deny!
+    CatRentalRequest.find(params[:id]).deny!
     redirect_to :back
   end
 

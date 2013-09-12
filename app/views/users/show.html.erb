@@ -1,0 +1,12 @@
+<h1>Your Cats' Approved Rentals</h1>
+
+<% @cat_arr.each do |cat, requests| %>
+  <strong><%= cat.name %></strong>
+  <table>
+    <tr><th></th><th>Start Date</th><th>End Date</th></tr>
+    <% requests.each do |request| %>
+      <% next unless request.status == "APPROVED" %>
+      <tr><td style='width:1%'></td><td style='width:30%; text-align: center'><%= request.start_date %></td><td style='width:30%; text-align: center'><%= request.end_date %></td></tr>
+    <% end %>
+  </table>
+<% end %>

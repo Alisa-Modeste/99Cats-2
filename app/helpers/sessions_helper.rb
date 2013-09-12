@@ -6,14 +6,15 @@ module SessionsHelper
   end
 
   def end_session
-    p "IN HELPER"
+    setted = Session.find_by_session_token(session[:session_token])
+    p "setted #{setted}"
+    setted.destroy
     session[:session_token] = nil
   end
 
   def current_user
-    p "got here"
-    p session[:session_token]
-    User.find_by_session_token(session[:session_token])
+    current_session = Session.find_by_session_token(session[:session_token])
+    current_session.user unless current_session.nil?
   end
 
 end
